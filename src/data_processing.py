@@ -19,7 +19,7 @@ def combine_raw_data() -> pd.DataFrame:
     df = pd.concat(df_list, ignore_index=True)
 
     df.columns = df.columns.str.strip()
-    df["SETTLEMENT_DATE"] = pd.to_datetime(df["SETTLEMENT_DATE"])
+    df["SETTLEMENT_DATE"] = pd.to_datetime(df["SETTLEMENT_DATE"], format="mixed")
     df = df.sort_values(["SETTLEMENT_DATE", "SETTLEMENT_PERIOD"]).reset_index(
         drop=True
     )
@@ -31,5 +31,5 @@ def combine_raw_data() -> pd.DataFrame:
     print(f"Successfully combined {len(file_paths)} files into: {output_path}")
     return df
 
-if __name__ == "main":
+if __name__ == "__main__":
     combine_raw_data()
